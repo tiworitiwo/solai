@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume - V. Solaiyammal</title>
     <style>
-        /* --- 1. RESET & VARIABLES --- */
+        /* --- 1. VARIABLES & RESET --- */
         :root {
-            --sidebar-bg: #2c3e50;
-            --sidebar-text: #ffffff;
+            --sidebar-bg: #2c3e50; /* Dark Navy */
+            --sidebar-text: #ecf0f1;
             --main-bg: #ffffff;
             --text-color: #333;
-            --accent-color: #3498db;
+            --accent-color: #3498db; /* Blue */
+            --light-gray: #f4f4f4;
         }
 
         * {
@@ -24,238 +25,259 @@
 
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #e0e0e0;
+            background: #e9ecef;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Align to top for scrolling */
             min-height: 100vh;
             padding: 20px;
         }
 
-        /* --- 2. RESUME CONTAINER --- */
+        /* --- 2. THE RESUME CONTAINER --- */
         .resume-container {
-            width: 210mm;
-            max-width: 100%; /* Adapts to screen width */
-            min-height: 297mm; /* A4 Height */
+            width: 100%;
+            max-width: 900px; /* Limits width on large screens */
             background: var(--main-bg);
             display: grid;
-            grid-template-columns: 32% 68%; /* Keeps the 2-column layout */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            /* DEFAULT: Desktop View (2 Columns) */
+            grid-template-columns: 35% 65%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            overflow: hidden;
+            animation: fadeIn 1s ease-out;
         }
 
-        /* --- 3. LEFT SIDEBAR --- */
+        /* --- 3. SIDEBAR (Profile) --- */
         .sidebar {
             background-color: var(--sidebar-bg);
             color: var(--sidebar-text);
-            padding: 25px 15px; /* Reduced padding for mobile space */
+            padding: 40px 30px;
             text-align: left;
-            word-wrap: break-word; /* Prevents text overflow */
         }
 
         .profile-pic {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             background: var(--accent-color);
             color: white;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 30px;
+            font-size: 36px;
             font-weight: bold;
-            margin: 0 auto 20px auto;
-            border: 3px solid rgba(255,255,255,0.3);
+            margin: 0 auto 30px auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         .sidebar h3 {
             color: var(--accent-color);
             text-transform: uppercase;
-            font-size: 13px;
+            font-size: 14px;
+            letter-spacing: 1.5px;
             border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-            margin-top: 20px;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            margin-top: 30px;
         }
 
-        .contact-info div {
-            font-size: 12px;
-            margin-bottom: 8px;
+        .contact-row {
+            margin-bottom: 12px;
+            font-size: 13px;
             display: flex;
             align-items: center;
-            gap: 5px;
-            line-height: 1.3;
+            gap: 10px;
+            word-break: break-all;
         }
 
         /* Skills */
-        .skill-bar { margin-bottom: 8px; }
-        .skill-name { font-size: 11px; display: block; margin-bottom: 2px; opacity: 0.9; }
-        .progress { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; }
-        .progress-fill { height: 100%; background: var(--accent-color); border-radius: 2px; }
-
-        .tag-cloud span {
-            display: inline-block;
-            background: rgba(255,255,255,0.15);
-            padding: 3px 6px;
-            border-radius: 3px;
-            font-size: 11px;
-            margin: 0 3px 4px 0;
+        .skill-item { margin-bottom: 12px; }
+        .skill-title { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; }
+        .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; }
+        .progress-fill { 
+            height: 100%; 
+            background: var(--accent-color); 
+            border-radius: 3px; 
+            width: 0; 
+            animation: fillBar 1.5s ease-out forwards 0.5s; 
         }
 
-        /* --- 4. RIGHT CONTENT --- */
+        /* Tags (Hobbies/Languages) */
+        .tags span {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin: 0 5px 5px 0;
+        }
+
+        /* --- 4. MAIN CONTENT --- */
         .main-content {
-            padding: 25px 20px;
+            padding: 40px;
         }
 
         header {
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            animation: slideDown 0.8s ease-out;
         }
 
         h1 {
-            font-size: 28px; /* Slightly smaller for mobile fit */
+            font-size: 38px;
             text-transform: uppercase;
             color: var(--sidebar-bg);
-            line-height: 1.1;
+            line-height: 1;
             margin-bottom: 5px;
         }
 
         .role {
-            font-size: 14px;
+            font-size: 18px;
             color: var(--accent-color);
-            font-weight: 700;
+            font-weight: 600;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .section-title {
-            font-size: 15px;
+            font-size: 16px;
             color: var(--sidebar-bg);
             text-transform: uppercase;
+            letter-spacing: 1.2px;
             font-weight: 700;
-            margin-bottom: 10px;
-            margin-top: 20px;
+            margin-bottom: 15px;
+            margin-top: 25px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
+
         .section-title::before {
             content: '';
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
             background: var(--accent-color);
             border-radius: 50%;
         }
 
-        p {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #444;
-            text-align: justify;
-            margin-bottom: 10px;
+        .card {
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: slideUp 0.8s ease-out forwards;
         }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.4s; }
 
-        .block { margin-bottom: 15px; }
-        .block-title { font-weight: bold; font-size: 14px; color: #000; }
-        .block-subtitle { font-style: italic; font-size: 12px; color: #666; margin-bottom: 5px; }
+        .card-title { font-weight: bold; font-size: 16px; color: #222; }
+        .card-subtitle { font-style: italic; font-size: 14px; color: #666; margin-bottom: 8px; display: block; }
+        p { font-size: 14px; line-height: 1.6; color: #555; text-align: justify; }
 
-        /* Declaration */
         .declaration {
             margin-top: 40px;
-            font-size: 11px;
-            color: #888;
+            padding-top: 20px;
             border-top: 1px solid #eee;
-            padding-top: 10px;
-        }
-        .signature-row {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 25px;
-            font-weight: bold;
             font-size: 12px;
-            color: #333;
+            color: #888;
         }
+        .signature-row { display: flex; justify-content: space-between; margin-top: 30px; font-weight: bold; color: #333; font-size: 14px; }
 
-        /* --- 5. MOBILE OPTIMIZATIONS (The Magic Part) --- */
-        @media screen and (max-width: 600px) {
-            body { padding: 0; background: #fff; }
+        /* --- 5. ANIMATIONS --- */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes fillBar { to { width: var(--w); } }
+
+        /* --- 6. MOBILE RESPONSIVE (Stacking Logic) --- */
+        @media screen and (max-width: 768px) {
+            body { padding: 0; background: var(--sidebar-bg); }
+            
             .resume-container {
+                display: flex; /* Stack vertically */
+                flex-direction: column;
+                border-radius: 0;
                 box-shadow: none;
-                width: 100%;
-                /* This ensures it stays side-by-side but fits the screen */
-                display: grid;
-                grid-template-columns: 35% 65%; 
             }
+
             .sidebar {
-                padding: 20px 10px;
+                text-align: center; /* Center align for mobile banner look */
+                padding: 30px 20px;
             }
+
+            .profile-pic { margin-bottom: 20px; }
+            
+            .contact-row {
+                justify-content: center; /* Center contact info */
+            }
+
             .main-content {
-                padding: 20px 15px;
+                background: white;
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+                margin-top: -20px; /* Stylish overlap */
+                padding: 30px 20px;
             }
-            /* Adjust fonts for small screens so they don't look huge */
-            h1 { font-size: 22px; }
-            .role { font-size: 12px; }
-            .section-title { font-size: 13px; margin-top: 15px; }
-            p, .contact-info div { font-size: 11px; }
-            .block-title { font-size: 13px; }
-            .profile-pic { width: 60px; height: 60px; font-size: 24px; }
+
+            h1 { font-size: 28px; }
+            .role { font-size: 14px; }
         }
 
-        /* --- 6. PRINT SETTINGS (Perfect PDF) --- */
+        /* --- 7. PRINT SETTINGS (Always keep 2-Column PDF) --- */
         @media print {
-            @page { size: A4; margin: 0; }
-            body { padding: 0; background: white; }
+            body { background: white; padding: 0; }
             .resume-container {
-                width: 210mm; height: 297mm;
-                display: grid;
-                grid-template-columns: 32% 68%;
+                display: grid; /* FORCE Grid for PDF */
+                grid-template-columns: 35% 65%;
+                width: 100%;
                 box-shadow: none;
+                margin: 0;
             }
-            h1 { font-size: 32px; } /* Restore big fonts for print */
-            p { font-size: 12pt; }
-            .contact-info div { font-size: 11pt; }
+            .sidebar { padding: 30px; }
+            .main-content { margin-top: 0; border-radius: 0; padding: 30px 40px; }
+            
+            /* Remove animations for print */
+            * { animation: none !important; }
+            .progress-fill { width: var(--w) !important; }
         }
     </style>
 </head>
 <body>
 
     <div class="resume-container">
+        
         <aside class="sidebar">
             <div class="profile-pic">VS</div>
 
-            <h3>Contact</h3>
-            <div class="contact-info">
-                <div>📞 9566271083</div>
-                <div>📧 solaipapu05@gmail.com</div>
-                <div>📍 M. Vadipatti, Dindigul</div>
-            </div>
+            <h3>Contact Info</h3>
+            <div class="contact-row">📞 +91 95662 71083</div>
+            <div class="contact-row">📧 solaipapu05@gmail.com</div>
+            <div class="contact-row">📍 M. Vadipatti, Dindigul</div>
 
             <h3>Skills</h3>
-            <div class="skill-bar">
-                <span class="skill-name">Communication</span>
-                <div class="progress"><div class="progress-fill" style="width: 95%"></div></div>
+            <div class="skill-item">
+                <div class="skill-title"><span>Communication</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="--w: 95%"></div></div>
             </div>
-            <div class="skill-bar">
-                <span class="skill-name">Listening</span>
-                <div class="progress"><div class="progress-fill" style="width: 90%"></div></div>
+            <div class="skill-item">
+                <div class="skill-title"><span>Active Listening</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="--w: 90%"></div></div>
             </div>
-            <div class="skill-bar">
-                <span class="skill-name">Customer Care</span>
-                <div class="progress"><div class="progress-fill" style="width: 85%"></div></div>
+            <div class="skill-item">
+                <div class="skill-title"><span>Customer Handling</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="--w: 85%"></div></div>
             </div>
 
             <h3>Languages</h3>
-            <div class="tag-cloud">
-                <span>Tamil</span>
-                <span>English</span>
+            <div class="tags">
+                <span>Tamil (Native)</span>
+                <span>English (Fluent)</span>
             </div>
 
-            <h3>Interests</h3>
-            <div class="tag-cloud">
-                <span>Painting</span>
-                <span>Basketball</span>
-                <span>Cooking</span>
-                <span>Pets</span>
+            <h3>Hobbies</h3>
+            <div class="tags">
+                <span>🎨 Painting</span>
+                <span>🏀 Basketball</span>
+                <span>🍳 Cooking</span>
+                <span>🐾 Pet Care</span>
             </div>
         </aside>
 
@@ -265,25 +287,27 @@
                 <div class="role">Telecaller</div>
             </header>
 
-            <div class="section-title">Career Objective</div>
-            <p>Motivated <strong>B.A. English Literature</strong> student seeking an entry-level position as a <strong>Telecaller</strong>. I aim to use my communication skills and active listening to contribute to the organization’s success.</p>
-
-            <div class="section-title">Education</div>
-            <div class="block">
-                <div class="block-title">B.A. English Literature</div>
-                <div class="block-subtitle">Madurai Kamaraj University | Final Year</div>
-                <p>Focused on linguistic skills and effective communication strategies.</p>
+            <div class="card">
+                <div class="section-title">Career Objective</div>
+                <p>Motivated and enthusiastic <strong>B.A. English Literature</strong> final year student seeking an entry-level position as a <strong>Telecaller</strong>. I possess strong communication skills and basic computer knowledge. I am eager to utilize my fluent speaking ability and active listening skills to contribute effectively to the organization’s success.</p>
             </div>
 
-            <div class="section-title">Work Experience</div>
-            <div class="block">
-                <div class="block-title">Telecaller</div>
-                <div class="block-subtitle">Fresher</div>
-                <p>Ready to handle customer inquiries with patience and professionalism.</p>
+            <div class="card">
+                <div class="section-title">Education</div>
+                <div class="card-title">Bachelor of Arts (B.A.) – English Literature</div>
+                <span class="card-subtitle">Madurai Kamaraj University | Final Year Student</span>
+                <p>Developing strong linguistic capabilities, analytical thinking, and effective communication strategies through comprehensive study of literature and language.</p>
+            </div>
+
+            <div class="card">
+                <div class="section-title">Work Experience</div>
+                <div class="card-title">Telecaller</div>
+                <span class="card-subtitle">Fresher / Entry Level</span>
+                <p>Prepared to handle customer inquiries with patience and professionalism. Ready to apply academic communication skills in a professional environment.</p>
             </div>
 
             <div class="declaration">
-                <p>I hereby declare that the information is true to the best of my knowledge.</p>
+                <p>I hereby declare that the above-mentioned information is true and correct to the best of my knowledge.</p>
                 <div class="signature-row">
                     <div>Place: Dindigul</div>
                     <div>(V. Solaiyammal)</div>
