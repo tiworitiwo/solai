@@ -2,17 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1024"> 
     <title>Resume - V. Solaiyammal</title>
     <style>
         /* --- 1. RESET & VARIABLES --- */
         :root {
-            --sidebar-bg: #1a252f; /* Deep Navy */
+            --sidebar-bg: #2c3e50;
             --sidebar-text: #ecf0f1;
             --main-bg: #ffffff;
-            --text-color: #2c3e50;
-            --accent-color: #3498db; /* Professional Blue */
-            --light-gray: #f4f6f7;
+            --text-color: #333;
+            --accent-color: #3498db;
         }
 
         * {
@@ -25,36 +24,38 @@
 
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #e9ecef; /* Grey background for the browser window */
-            padding: 20px;
+            background: #555;
             display: flex;
             justify-content: center;
+            align-items: center;
             min-height: 100vh;
+            padding: 20px;
         }
 
-        /* --- 2. THE RESUME CONTAINER (Paper) --- */
+        /* --- 2. RESUME PAGE (Strict A4 Size) --- */
         .resume-container {
+            width: 210mm;
+            height: 297mm; /* Fixed A4 Height */
             background: var(--main-bg);
-            width: 100%;
-            max-width: 900px; /* Limits width on big screens */
             display: grid;
-            grid-template-columns: 35% 65%; /* Desktop: 2 Columns */
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            border-radius: 8px;
-            overflow: hidden;
-            animation: popIn 0.8s ease-out;
-        }
-
-        /* --- 3. LEFT SIDEBAR (Profile Section) --- */
-        .sidebar {
-            background-color: var(--sidebar-bg);
-            color: var(--sidebar-text);
-            padding: 40px 25px;
-            text-align: left;
+            grid-template-columns: 32% 68%; /* Sidebar width / Content width */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden; /* Ensures nothing spills out */
             position: relative;
         }
 
-        .profile-circle {
+        /* --- 3. LEFT SIDEBAR --- */
+        .sidebar {
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            padding: 30px 20px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Space between sections */
+        }
+
+        .profile-pic {
             width: 100px;
             height: 100px;
             background: var(--accent-color);
@@ -63,278 +64,236 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 36px;
+            font-size: 35px;
             font-weight: bold;
-            margin: 0 auto 30px auto;
-            border: 4px solid rgba(255,255,255,0.2);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            animation: bounceIn 1s;
+            margin: 0 auto 10px auto;
+            border: 3px solid rgba(255,255,255,0.2);
         }
 
-        .sidebar h3 {
+        .sidebar-section h3 {
             color: var(--accent-color);
             text-transform: uppercase;
             font-size: 14px;
-            letter-spacing: 2px;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            letter-spacing: 1.5px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
             padding-bottom: 5px;
+            margin-bottom: 12px;
         }
 
-        .contact-item {
+        .contact-info div {
             font-size: 13px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            opacity: 0.9;
+            gap: 8px;
+            word-break: break-word;
         }
 
-        /* Skill Bars */
-        .skill-box { margin-bottom: 15px; }
-        .skill-label { font-size: 12px; display: flex; justify-content: space-between; margin-bottom: 5px; }
-        .progress-bg { background: rgba(255,255,255,0.1); height: 6px; border-radius: 3px; overflow: hidden; }
-        .progress-fill { 
-            height: 100%; 
-            background: var(--accent-color); 
-            width: 0; 
-            animation: fillBar 1.5s ease-out forwards 0.5s; 
-        }
+        .skill-bar { margin-bottom: 10px; }
+        .skill-name { font-size: 12px; display: block; margin-bottom: 3px; }
+        .progress { width: 100%; height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; }
+        .progress-fill { height: 100%; background: var(--accent-color); border-radius: 3px; }
 
-        /* Hobbies Tags */
-        .tags span {
+        .tag-cloud span {
             display: inline-block;
-            background: rgba(255,255,255,0.15);
-            padding: 5px 10px;
+            background: rgba(255,255,255,0.1);
+            padding: 4px 8px;
             border-radius: 4px;
             font-size: 12px;
-            margin: 0 5px 5px 0;
-            transition: background 0.3s;
+            margin: 0 4px 5px 0;
         }
-        .tags span:hover { background: var(--accent-color); }
 
-        /* --- 4. RIGHT CONTENT (Main Info) --- */
+        /* --- 4. RIGHT CONTENT --- */
         .main-content {
-            padding: 40px;
+            padding: 35px;
             display: flex;
             flex-direction: column;
         }
 
         header {
-            margin-bottom: 30px;
-            border-bottom: 3px solid var(--accent-color);
-            padding-bottom: 20px;
-            animation: slideDown 0.8s ease-out;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         h1 {
-            font-size: 38px;
+            font-size: 36px;
             text-transform: uppercase;
             color: var(--sidebar-bg);
+            line-height: 1;
             margin-bottom: 5px;
-            letter-spacing: 1px;
         }
 
-        .job-title {
+        .role {
+            font-size: 16px;
             color: var(--accent-color);
-            font-size: 18px;
             font-weight: 600;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             text-transform: uppercase;
         }
-
-        .section {
-            margin-bottom: 25px;
-            opacity: 0; /* Hidden for animation */
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        .section:nth-child(2) { animation-delay: 0.2s; }
-        .section:nth-child(3) { animation-delay: 0.4s; }
-        .section:nth-child(4) { animation-delay: 0.6s; }
 
         .section-title {
             font-size: 16px;
-            text-transform: uppercase;
             color: var(--sidebar-bg);
+            text-transform: uppercase;
+            letter-spacing: 1px;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            margin-top: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
+
         .section-title::before {
             content: '';
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background: var(--accent-color);
-            border-radius: 2px;
-            transform: rotate(45deg);
+            border-radius: 50%;
         }
 
-        p { color: #555; line-height: 1.6; font-size: 14px; margin-bottom: 10px; text-align: justify; }
+        p {
+            font-size: 13px; /* Slightly smaller to fit 1 page */
+            line-height: 1.5;
+            color: #555;
+            text-align: justify;
+            margin-bottom: 0;
+        }
 
-        .experience-item h4 { font-size: 16px; color: #222; }
-        .experience-item i { font-size: 13px; color: #777; display: block; margin-bottom: 5px; }
+        .block { margin-bottom: 15px; }
+        .block-title { font-weight: bold; font-size: 15px; color: #222; }
+        .block-subtitle { font-style: italic; font-size: 13px; color: #777; margin-bottom: 5px; }
 
-        /* Declaration & Signature */
+        /* Declaration at the bottom */
         .declaration {
-            margin-top: auto;
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
+            margin-top: auto; /* Pushes to absolute bottom of container */
             font-size: 12px;
-            color: #888;
+            color: #777;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
         }
-        .signature-grid {
+
+        .signature-row {
             display: flex;
             justify-content: space-between;
             margin-top: 30px;
             font-weight: bold;
+            font-size: 13px;
             color: #333;
         }
 
-        /* --- 5. ANIMATIONS --- */
-        @keyframes popIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fillBar { to { width: var(--w); } }
-        @keyframes bounceIn { 0% { transform: scale(0); } 60% { transform: scale(1.1); } 100% { transform: scale(1); } }
-
-        /* --- 6. MOBILE RESPONSIVE (The "Phone View" Magic) --- */
-        @media screen and (max-width: 768px) {
-            body { padding: 0; background: var(--sidebar-bg); }
-            
-            .resume-container {
-                grid-template-columns: 1fr; /* Stack into 1 column */
-                width: 100%;
-                border-radius: 0;
-                box-shadow: none;
-            }
-
-            /* Turn Sidebar into a Top Header */
-            .sidebar {
-                text-align: center;
-                padding: 30px 20px;
-            }
-
-            .contact-item {
-                justify-content: center;
-            }
-
-            .profile-circle { margin-bottom: 20px; }
-
-            /* Adjust Main Content */
-            .main-content {
-                border-top-left-radius: 20px;
-                border-top-right-radius: 20px;
-                background: white;
-                margin-top: -20px; /* Overlap effect */
-                padding: 30px 20px;
-            }
-
-            h1 { font-size: 28px; }
-            .job-title { font-size: 14px; }
+        /* --- 5. ANIMATIONS (Only for Screen) --- */
+        @media screen {
+            .sidebar { animation: slideInLeft 1s ease-out; }
+            .main-content { animation: slideInRight 1s ease-out; }
+            .progress-fill { width: 0; animation: fillBar 1.5s ease-out forwards 0.5s; }
         }
 
-        /* --- 7. PRINT SETTINGS (A4 PDF) --- */
+        @keyframes slideInLeft { from { transform: translateX(-50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInRight { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fillBar { to { width: var(--w); } }
+
+        /* --- 6. PRINT SETTINGS (Perfect A4) --- */
         @media print {
+            @page { margin: 0; size: A4; }
             body { background: white; padding: 0; }
             .resume-container {
-                width: 100%;
-                max-width: 100%;
+                width: 210mm; height: 297mm;
                 box-shadow: none;
-                grid-template-columns: 35% 65% !important; /* Force 2 columns */
-                display: grid !important;
+                margin: 0;
+                print-color-adjust: exact;
             }
-            .sidebar { padding: 20px; -webkit-print-color-adjust: exact; }
-            .main-content { margin-top: 0; padding: 20px 40px; }
-            /* Stop animations for print */
-            * { animation: none !important; transition: none !important; }
-            .progress-fill { width: var(--w) !important; }
-            /* Hide print button if added */
-            .no-print { display: none; }
+            .progress-fill { width: var(--w) !important; animation: none !important; }
+            .sidebar, .main-content { animation: none !important; }
         }
     </style>
 </head>
 <body>
 
     <div class="resume-container">
-        
         <aside class="sidebar">
-            <div class="profile-circle">VS</div>
+            <div class="profile-pic">VS</div>
 
-            <h3>Contact Info</h3>
-            <div class="contact-item">📞 +91 95662 71083</div>
-            <div class="contact-item">📧 solaipapu05@gmail.com</div>
-            <div class="contact-item">📍 M. Vadipatti, Dindigul 624211</div>
-
-            <h3>Key Skills</h3>
-            <div class="skill-box">
-                <div class="skill-label"><span>Communication</span> <span>95%</span></div>
-                <div class="progress-bg"><div class="progress-fill" style="--w:95%"></div></div>
-            </div>
-            <div class="skill-box">
-                <div class="skill-label"><span>Active Listening</span> <span>90%</span></div>
-                <div class="progress-bg"><div class="progress-fill" style="--w:90%"></div></div>
-            </div>
-            <div class="skill-box">
-                <div class="skill-label"><span>Customer Handling</span> <span>85%</span></div>
-                <div class="progress-bg"><div class="progress-fill" style="--w:85%"></div></div>
+            <div class="sidebar-section">
+                <h3>Contact</h3>
+                <div class="contact-info">
+                    <div>📞 +91 95662 71083</div>
+                    <div>📧 solaipapu05@gmail.com</div>
+                    <div>📍 M. Vadipatti, Dindigul 624211</div>
+                </div>
             </div>
 
-            <h3>Languages</h3>
-            <div class="tags">
-                <span>Tamil (Native)</span>
-                <span>English (Fluent)</span>
+            <div class="sidebar-section">
+                <h3>Skills</h3>
+                <div class="skill-bar">
+                    <span class="skill-name">Communication</span>
+                    <div class="progress"><div class="progress-fill" style="--w: 95%"></div></div>
+                </div>
+                <div class="skill-bar">
+                    <span class="skill-name">Active Listening</span>
+                    <div class="progress"><div class="progress-fill" style="--w: 90%"></div></div>
+                </div>
+                <div class="skill-bar">
+                    <span class="skill-name">Customer Handling</span>
+                    <div class="progress"><div class="progress-fill" style="--w: 85%"></div></div>
+                </div>
+                <div class="skill-bar">
+                    <span class="skill-name">Computer Basics</span>
+                    <div class="progress"><div class="progress-fill" style="--w: 80%"></div></div>
+                </div>
             </div>
 
-            <h3>Hobbies</h3>
-            <div class="tags">
-                <span>🎨 Painting</span>
-                <span>🏀 Basketball</span>
-                <span>🍳 Cooking</span>
-                <span>🐾 Pet Care</span>
+            <div class="sidebar-section">
+                <h3>Languages</h3>
+                <div class="tag-cloud">
+                    <span>Tamil (Native)</span>
+                    <span>English (Fluent)</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Hobbies</h3>
+                <div class="tag-cloud">
+                    <span>🎨 Painting</span>
+                    <span>🏀 Basketball</span>
+                    <span>🍳 Cooking</span>
+                    <span>🐾 Pets</span>
+                </div>
             </div>
         </aside>
 
         <main class="main-content">
             <header>
                 <h1>V. Solaiyammal</h1>
-                <div class="job-title">Telecaller / Customer Support</div>
+                <div class="role">Aspiring Telecaller</div>
             </header>
 
-            <div class="section">
-                <div class="section-title">Career Objective</div>
-                <p>Motivated and enthusiastic <strong>B.A. English Literature</strong> final year student seeking an entry-level position as a <strong>Telecaller</strong>. I possess strong communication skills and basic computer knowledge. I am eager to utilize my fluent speaking ability and active listening skills to contribute effectively to the organization’s success.</p>
+            <div class="section-title">Career Objective</div>
+            <p>Motivated and enthusiastic <strong>B.A. English Literature</strong> final year student seeking an entry-level position as a <strong>Telecaller</strong>. I possess strong communication skills and basic computer knowledge. I am eager to utilize my fluent speaking ability and active listening skills to contribute effectively to the organization’s success.</p>
+
+            <div class="section-title">Education</div>
+            <div class="block">
+                <div class="block-title">Bachelor of Arts (B.A.) – English Literature</div>
+                <div class="block-subtitle">Madurai Kamaraj University | Final Year Student</div>
+                <p>Developing strong linguistic capabilities, analytical thinking, and effective communication strategies through comprehensive study.</p>
             </div>
 
-            <div class="section">
-                <div class="section-title">Education</div>
-                <div class="experience-item">
-                    <h4>Bachelor of Arts (B.A.) – English Literature</h4>
-                    <i>Madurai Kamaraj University | Final Year Student</i>
-                    <p>Developing strong linguistic and analytical skills through comprehensive study of literature and language.</p>
-                </div>
-            </div>
-
-            <div class="section">
-                <div class="section-title">Work Experience</div>
-                <div class="experience-item">
-                    <h4>Telecaller</h4>
-                    <i>Fresher / Entry Level</i>
-                    <p>Ready to apply academic communication skills in a professional customer-handling environment. Trained in handling inquiries politely and efficiently.</p>
-                </div>
+            <div class="section-title">Work Experience</div>
+            <div class="block">
+                <div class="block-title">Telecaller</div>
+                <div class="block-subtitle">Fresher / Entry Level</div>
+                <p>Prepared to handle customer inquiries with patience and professionalism. Ready to apply academic communication skills in a professional environment.</p>
             </div>
 
             <div class="declaration">
                 <p>I hereby declare that the above-mentioned information is true and correct to the best of my knowledge.</p>
-                <div class="signature-grid">
+                <div class="signature-row">
                     <div>Place: Dindigul</div>
                     <div>(V. Solaiyammal)</div>
                 </div>
             </div>
         </main>
-
     </div>
 
 </body>
