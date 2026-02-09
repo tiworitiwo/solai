@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1024"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Resume - V. Solaiyammal</title>
     <style>
         /* --- 1. RESET & VARIABLES --- */
         :root {
             --sidebar-bg: #2c3e50;
-            --sidebar-text: #ecf0f1;
+            --sidebar-text: #ffffff;
             --main-bg: #ffffff;
             --text-color: #333;
             --accent-color: #3498db;
@@ -24,188 +24,196 @@
 
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #555;
+            background: #e0e0e0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Align to top for scrolling */
             min-height: 100vh;
             padding: 20px;
         }
 
-        /* --- 2. RESUME PAGE (Strict A4 Size) --- */
+        /* --- 2. RESUME CONTAINER --- */
         .resume-container {
             width: 210mm;
-            height: 297mm; /* Fixed A4 Height */
+            max-width: 100%; /* Adapts to screen width */
+            min-height: 297mm; /* A4 Height */
             background: var(--main-bg);
             display: grid;
-            grid-template-columns: 32% 68%; /* Sidebar width / Content width */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            overflow: hidden; /* Ensures nothing spills out */
-            position: relative;
+            grid-template-columns: 32% 68%; /* Keeps the 2-column layout */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
         /* --- 3. LEFT SIDEBAR --- */
         .sidebar {
             background-color: var(--sidebar-bg);
             color: var(--sidebar-text);
-            padding: 30px 20px;
+            padding: 25px 15px; /* Reduced padding for mobile space */
             text-align: left;
-            display: flex;
-            flex-direction: column;
-            gap: 20px; /* Space between sections */
+            word-wrap: break-word; /* Prevents text overflow */
         }
 
         .profile-pic {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             background: var(--accent-color);
             color: white;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 35px;
+            font-size: 30px;
             font-weight: bold;
-            margin: 0 auto 10px auto;
-            border: 3px solid rgba(255,255,255,0.2);
+            margin: 0 auto 20px auto;
+            border: 3px solid rgba(255,255,255,0.3);
         }
 
-        .sidebar-section h3 {
+        .sidebar h3 {
             color: var(--accent-color);
             text-transform: uppercase;
-            font-size: 14px;
-            letter-spacing: 1.5px;
+            font-size: 13px;
             border-bottom: 1px solid rgba(255,255,255,0.2);
             padding-bottom: 5px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            margin-top: 20px;
         }
 
         .contact-info div {
-            font-size: 13px;
-            margin-bottom: 10px;
+            font-size: 12px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            word-break: break-word;
+            gap: 5px;
+            line-height: 1.3;
         }
 
-        .skill-bar { margin-bottom: 10px; }
-        .skill-name { font-size: 12px; display: block; margin-bottom: 3px; }
-        .progress { width: 100%; height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; }
-        .progress-fill { height: 100%; background: var(--accent-color); border-radius: 3px; }
+        /* Skills */
+        .skill-bar { margin-bottom: 8px; }
+        .skill-name { font-size: 11px; display: block; margin-bottom: 2px; opacity: 0.9; }
+        .progress { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; }
+        .progress-fill { height: 100%; background: var(--accent-color); border-radius: 2px; }
 
         .tag-cloud span {
             display: inline-block;
-            background: rgba(255,255,255,0.1);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            margin: 0 4px 5px 0;
+            background: rgba(255,255,255,0.15);
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            margin: 0 3px 4px 0;
         }
 
         /* --- 4. RIGHT CONTENT --- */
         .main-content {
-            padding: 35px;
-            display: flex;
-            flex-direction: column;
+            padding: 25px 20px;
         }
 
         header {
             border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         h1 {
-            font-size: 36px;
+            font-size: 28px; /* Slightly smaller for mobile fit */
             text-transform: uppercase;
             color: var(--sidebar-bg);
-            line-height: 1;
+            line-height: 1.1;
             margin-bottom: 5px;
         }
 
         .role {
-            font-size: 16px;
+            font-size: 14px;
             color: var(--accent-color);
-            font-weight: 600;
-            letter-spacing: 1px;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .section-title {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--sidebar-bg);
             text-transform: uppercase;
-            letter-spacing: 1px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             margin-top: 20px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
-
         .section-title::before {
             content: '';
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             background: var(--accent-color);
             border-radius: 50%;
         }
 
         p {
-            font-size: 13px; /* Slightly smaller to fit 1 page */
+            font-size: 13px;
             line-height: 1.5;
-            color: #555;
+            color: #444;
             text-align: justify;
-            margin-bottom: 0;
+            margin-bottom: 10px;
         }
 
         .block { margin-bottom: 15px; }
-        .block-title { font-weight: bold; font-size: 15px; color: #222; }
-        .block-subtitle { font-style: italic; font-size: 13px; color: #777; margin-bottom: 5px; }
+        .block-title { font-weight: bold; font-size: 14px; color: #000; }
+        .block-subtitle { font-style: italic; font-size: 12px; color: #666; margin-bottom: 5px; }
 
-        /* Declaration at the bottom */
+        /* Declaration */
         .declaration {
-            margin-top: auto; /* Pushes to absolute bottom of container */
-            font-size: 12px;
-            color: #777;
+            margin-top: 40px;
+            font-size: 11px;
+            color: #888;
             border-top: 1px solid #eee;
-            padding-top: 15px;
+            padding-top: 10px;
         }
-
         .signature-row {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
+            margin-top: 25px;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 12px;
             color: #333;
         }
 
-        /* --- 5. ANIMATIONS (Only for Screen) --- */
-        @media screen {
-            .sidebar { animation: slideInLeft 1s ease-out; }
-            .main-content { animation: slideInRight 1s ease-out; }
-            .progress-fill { width: 0; animation: fillBar 1.5s ease-out forwards 0.5s; }
+        /* --- 5. MOBILE OPTIMIZATIONS (The Magic Part) --- */
+        @media screen and (max-width: 600px) {
+            body { padding: 0; background: #fff; }
+            .resume-container {
+                box-shadow: none;
+                width: 100%;
+                /* This ensures it stays side-by-side but fits the screen */
+                display: grid;
+                grid-template-columns: 35% 65%; 
+            }
+            .sidebar {
+                padding: 20px 10px;
+            }
+            .main-content {
+                padding: 20px 15px;
+            }
+            /* Adjust fonts for small screens so they don't look huge */
+            h1 { font-size: 22px; }
+            .role { font-size: 12px; }
+            .section-title { font-size: 13px; margin-top: 15px; }
+            p, .contact-info div { font-size: 11px; }
+            .block-title { font-size: 13px; }
+            .profile-pic { width: 60px; height: 60px; font-size: 24px; }
         }
 
-        @keyframes slideInLeft { from { transform: translateX(-50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes slideInRight { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes fillBar { to { width: var(--w); } }
-
-        /* --- 6. PRINT SETTINGS (Perfect A4) --- */
+        /* --- 6. PRINT SETTINGS (Perfect PDF) --- */
         @media print {
-            @page { margin: 0; size: A4; }
-            body { background: white; padding: 0; }
+            @page { size: A4; margin: 0; }
+            body { padding: 0; background: white; }
             .resume-container {
                 width: 210mm; height: 297mm;
+                display: grid;
+                grid-template-columns: 32% 68%;
                 box-shadow: none;
-                margin: 0;
-                print-color-adjust: exact;
             }
-            .progress-fill { width: var(--w) !important; animation: none !important; }
-            .sidebar, .main-content { animation: none !important; }
+            h1 { font-size: 32px; } /* Restore big fonts for print */
+            p { font-size: 12pt; }
+            .contact-info div { font-size: 11pt; }
         }
     </style>
 </head>
@@ -215,79 +223,67 @@
         <aside class="sidebar">
             <div class="profile-pic">VS</div>
 
-            <div class="sidebar-section">
-                <h3>Contact</h3>
-                <div class="contact-info">
-                    <div>📞 +91 95662 71083</div>
-                    <div>📧 solaipapu05@gmail.com</div>
-                    <div>📍 M. Vadipatti, Dindigul 624211</div>
-                </div>
+            <h3>Contact</h3>
+            <div class="contact-info">
+                <div>📞 9566271083</div>
+                <div>📧 solaipapu05@gmail.com</div>
+                <div>📍 M. Vadipatti, Dindigul</div>
             </div>
 
-            <div class="sidebar-section">
-                <h3>Skills</h3>
-                <div class="skill-bar">
-                    <span class="skill-name">Communication</span>
-                    <div class="progress"><div class="progress-fill" style="--w: 95%"></div></div>
-                </div>
-                <div class="skill-bar">
-                    <span class="skill-name">Active Listening</span>
-                    <div class="progress"><div class="progress-fill" style="--w: 90%"></div></div>
-                </div>
-                <div class="skill-bar">
-                    <span class="skill-name">Customer Handling</span>
-                    <div class="progress"><div class="progress-fill" style="--w: 85%"></div></div>
-                </div>
-                <div class="skill-bar">
-                    <span class="skill-name">Computer Basics</span>
-                    <div class="progress"><div class="progress-fill" style="--w: 80%"></div></div>
-                </div>
+            <h3>Skills</h3>
+            <div class="skill-bar">
+                <span class="skill-name">Communication</span>
+                <div class="progress"><div class="progress-fill" style="width: 95%"></div></div>
+            </div>
+            <div class="skill-bar">
+                <span class="skill-name">Listening</span>
+                <div class="progress"><div class="progress-fill" style="width: 90%"></div></div>
+            </div>
+            <div class="skill-bar">
+                <span class="skill-name">Customer Care</span>
+                <div class="progress"><div class="progress-fill" style="width: 85%"></div></div>
             </div>
 
-            <div class="sidebar-section">
-                <h3>Languages</h3>
-                <div class="tag-cloud">
-                    <span>Tamil (Native)</span>
-                    <span>English (Fluent)</span>
-                </div>
+            <h3>Languages</h3>
+            <div class="tag-cloud">
+                <span>Tamil</span>
+                <span>English</span>
             </div>
 
-            <div class="sidebar-section">
-                <h3>Hobbies</h3>
-                <div class="tag-cloud">
-                    <span>🎨 Painting</span>
-                    <span>🏀 Basketball</span>
-                    <span>🍳 Cooking</span>
-                    <span>🐾 Pets</span>
-                </div>
+            <h3>Interests</h3>
+            <div class="tag-cloud">
+                <span>Painting</span>
+                <span>Basketball</span>
+                <span>Cooking</span>
+                <span>Pets</span>
             </div>
         </aside>
 
         <main class="main-content">
             <header>
                 <h1>V. Solaiyammal</h1>
-                <div class="role">Aspiring Telecaller</div>
+                <div class="role">Telecaller</div>
             </header>
 
             <div class="section-title">Career Objective</div>
-            <p>Motivated and enthusiastic <strong>B.A. English Literature</strong> final year student seeking an entry-level position as a <strong>Telecaller</strong>. I possess strong communication skills and basic computer knowledge. I am eager to utilize my fluent speaking ability and active listening skills to contribute effectively to the organization’s success.</p>
+            <p>Motivated <strong>B.A. English Literature</strong> student seeking an entry-level position as a <strong>Telecaller</strong>. I aim to use my communication skills and active listening to contribute to the organization’s success.</p>
 
             <div class="section-title">Education</div>
             <div class="block">
-                <div class="block-title">Bachelor of Arts (B.A.) – English Literature</div>
-                <div class="block-subtitle">Madurai Kamaraj University | Final Year Student</div>
-                <p>Developing strong linguistic capabilities, analytical thinking, and effective communication strategies through comprehensive study.</p>
+                <div class="block-title">B.A. English Literature</div>
+                <div class="block-subtitle">Madurai Kamaraj University | Final Year</div>
+                <p>Focused on linguistic skills and effective communication strategies.</p>
             </div>
 
             <div class="section-title">Work Experience</div>
             <div class="block">
                 <div class="block-title">Telecaller</div>
-                <div class="block-subtitle">Fresher / Entry Level</div>
-                <p>Prepared to handle customer inquiries with patience and professionalism. Ready to apply academic communication skills in a professional environment.</p>
+                <div class="block-subtitle">Fresher</div>
+                <p>Ready to handle customer inquiries with patience and professionalism.</p>
             </div>
 
             <div class="declaration">
-                <p>I hereby declare that the above-mentioned information is true and correct to the best of my knowledge.</p>
+                <p>I hereby declare that the information is true to the best of my knowledge.</p>
                 <div class="signature-row">
                     <div>Place: Dindigul</div>
                     <div>(V. Solaiyammal)</div>
